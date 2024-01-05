@@ -1,5 +1,3 @@
-import 'https://kit.fontawesome.com/1700d76244.js'
-
 const TodoItem = (props) => {
 
     return (

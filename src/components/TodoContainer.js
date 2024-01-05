@@ -38,8 +38,8 @@ const TodoContainer = () => {
                 <div className="todo-list-con" id='todo-con'>
 
                     <TodoItem title="Create a react Project" />
-                    <TodoItem title="Create a react Projec" />
-                    <TodoItem title="Create a react Projec" />
+                    <TodoItem title="First React Project" />
+                    <TodoItem title="Hello Woo" />
                 </div>
             </div>
         </>
