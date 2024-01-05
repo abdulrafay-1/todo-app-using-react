@@ -120,7 +120,7 @@ h1 {
   gap: 12px;
 }
 
-.icons-container > i {
+.icons-container>i {
   color: #222;
   font-size: 20px;
   cursor: pointer;
@@ -143,6 +143,15 @@ h1 {
   cursor: pointer;
 }
 
+.submit-btn:hover {
+  background-color: #4d58bb;
+  cursor: pointer;
+}
+
+.submit-btn:active {
+  transform: translateY(2px);
+}
+
 #todo-input {
   margin-right: 5px;
   padding: 10px;
@@ -161,4 +170,4 @@ h1 {
 
 #todo-input::placeholder {
   font-size: 14px;
-} 
+}

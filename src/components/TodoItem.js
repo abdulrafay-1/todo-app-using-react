@@ -5,7 +5,7 @@ const TodoItem = (props) => {
             <div>
                 <input type="checkbox" className="checkbox"></input>
                 <div className="todo-text">
-                    <h4>{props.title}</h4>
+                    <h4 className="title">{props.title}</h4>
                     <p>4:20 AM ,01/08/2023</p>
                 </div>
             </div>

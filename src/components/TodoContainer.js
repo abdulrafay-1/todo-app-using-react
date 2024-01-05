@@ -11,19 +11,32 @@ const TodoContainer = () => {
         document.querySelector(".input-form").addEventListener("submit", (e) => e.preventDefault());
         let todoInput = document.getElementById("todo-input");
         let submitBtn = document.querySelector(".submit-btn");
+        let checkboxes = document.querySelectorAll(".checkbox");
         var todoCon = ReactDOM.createRoot(document.getElementById('todo-con'));
-      
+        let todoTitles = document.querySelectorAll(".title");
+       
+        checkboxes.forEach((checkbox, index) => {
+            checkbox.addEventListener("change", () => {
+                if (checkbox.checked) {
+                    todoTitles[index].style.textDecoration = "line-through"
+                } else {
+                    todoTitles[index].style.textDecoration = "none"
+                }
+            })
+        })
+
+
         function addTodo() {
-          todoCon.render(<TodoItem title={todoInput.value} />);
+            todoCon.render(<TodoItem title={todoInput.value} />);
         }
-      
+
         submitBtn.addEventListener("click", addTodo);
-      
+
         // Clean up event listener on component unmount
         return () => {
-          submitBtn.removeEventListener("click", addTodo);
+            submitBtn.removeEventListener("click", addTodo);
         };
-      }, []);
+    }, []);
 
     return (
         <>
@@ -39,7 +52,7 @@ const TodoContainer = () => {
 
                     <TodoItem title="Create a react Project" />
                     <TodoItem title="First React Project" />
-                    <TodoItem title="Hello Woo" />
+                    <TodoItem title="Hello World" />
                 </div>
             </div>
         </>
