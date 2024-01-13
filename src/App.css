@@ -18,7 +18,7 @@ body {
 
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -35,7 +35,7 @@ h1 {
   width: 500px;
 }
 
-.todo-container div:first-child {
+.todo>div {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -81,6 +81,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   background-color: #fff;
+  align-items: center;
   border-radius: 5px;
   padding: 15px 10px;
   margin-bottom: 10px;
