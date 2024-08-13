@@ -1,26 +1,40 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const TodoItem = () => {
-
-    var [todoItemArr, todoSetter] = useState([])
+const TodoItem = (props) => {
+    const [todoItemArr, todoSetter] = useState([])
     const [inputValue, setInputValue] = useState('')
+    useEffect(() => {
+        const todoItemsFromLocal = JSON.parse(localStorage.getItem("todoItems")) || [];
+        console.log(todoItemsFromLocal);
+        if (todoItemsFromLocal.length) {
+            todoSetter([...todoItemsFromLocal]);
+        }
+    }, [])
+
     const addTodo = (e) => {
         e.preventDefault()
-        var todoId = todoItemArr.length ? todoItemArr[todoItemArr.length - 1].todoId + 1 : 51;
-        let createdAt = Date.now()
+        var todoId = todoItemArr.length > 0 ? (todoItemArr[0].todoId + 1) : 51;
+        let createdAt = new Date().toLocaleString();
         if (!inputValue.trim()) {
             alert("Please Enter a todo")
         } else {
-            setInputValue('')
             const todoItem = {
                 todoId,
                 inputValue,
                 createdAt
             }
-            todoSetter([...todoItemArr, todoItem])
+            todoSetter([todoItem, ...todoItemArr])
+            localStorage.setItem("todoItems", JSON.stringify(todoItemArr))
+            setInputValue('')
         }
-
     }
+    const toggleDarkMode = () => {
+            if (props.dark === true) {
+                return ' dark-mode'
+            }
+            return "";
+    }
+
 
     const deleteTodo = (id) => {
         const updatedTodoItemArr = todoItemArr.filter((todo) => todo.todoId !== id);
@@ -37,20 +51,24 @@ const TodoItem = () => {
         }
     }
 
+    useEffect(() => {
+        localStorage.setItem("todoItems", JSON.stringify(todoItemArr));
+    }, [todoItemArr]);
+
     return (
         <>
             <form className='input-form'>
-                <input type='text' id='todo-input' placeholder='Enter text...' value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
-                <button className='submit-btn' onClick={addTodo}>Submit</button>
+                <input type='text' id='todo-input' className={`${toggleDarkMode()}`} placeholder='Enter text...' value={inputValue} onChange={(e) => setInputValue(e.target.value)}></input>
+                <button className='submit-btn' type="submit" onClick={addTodo}>Submit</button>
             </form>
             {
                 todoItemArr.map((todo) => {
                     return (
-                        <div className="todo">
+                        <div className={`todo ${toggleDarkMode()}`} key={todo.todoId}>
                             <div>
                                 <div className="todo-text">
                                     <h4 className="title">{todo.inputValue}</h4>
-                                    <p>{new Date(todo.createdAt).toLocaleString()}</p>
+                                    <p>{todo.createdAt}</p>
                                 </div>
                             </div>
                             <div className='icons-container'>
@@ -58,14 +76,11 @@ const TodoItem = () => {
                                 <i className="fa-solid fa-pen" onClick={() => updateTodo(todo.todoId)}></i>
                             </div>
                         </div>
-
                     )
                 })
             }
         </>
     )
 }
-
-
 
 export default TodoItem;

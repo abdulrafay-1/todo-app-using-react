@@ -5,13 +5,13 @@ import { createRoot } from 'react-dom/client';
 
 
 
-const TodoContainer = () => {
+const TodoContainer = (props) => {
 
     return (
         <>
-            <div className="todo-container">
+            <div className={`todo-container`}>
                 <div className="todo-list-con" id='todo-con'>
-                    < TodoItem />
+                    <TodoItem dark={props.dark} />
                 </div>
             </div>
         </>
